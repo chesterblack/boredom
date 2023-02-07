@@ -8,7 +8,7 @@ export default function Home({ allLists }) {
 	const [category, setCategory] = useState('all');
 	const [selectedItem, setSelectedItem] = useState(false);
 	const [list, setList] = useState(false);
-	const [userID, setUserID] = useState('1');
+	const [userID, setUserID] = useState("0");
 	
 	useEffect(() => {
 		let filteredLists = allLists.data.filter((el) => {
@@ -41,7 +41,7 @@ export default function Home({ allLists }) {
 		<>
 			<input
 				type="number"
-				min={1}
+				min="0"
 				value={userID}
 				onChange={
 					(e) => {
