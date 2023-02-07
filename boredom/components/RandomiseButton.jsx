@@ -1,6 +1,6 @@
-import list from "@/lib/list";
+// import list from "@/lib/list";
 
-export default function RandomiseButton({ category, selectedItem, setSelectedItem }) {
+export default function RandomiseButton({ category, selectedItem, setSelectedItem, list }) {
   const handleClick = () => {
     let workingList = list;
     if (category !== 'all') {
