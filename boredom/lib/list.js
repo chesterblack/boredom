@@ -9,6 +9,10 @@ const list = [
 	{ name: "Polgara's Rewot", categories: ["dnd", "writing"] },
 	{ name: "Storms & Surges", categories: ["dnd", "writing"] },
 
+	{ name: "Grob squad campaign prep", categories: ["dnd", "writing", "art"] },
+
+	{ name: "Wyvernhole", categories: ["writing", "dev"] },
+
 	{ name: "Vessel", categories: ["writing"] },
 ];
 

@@ -2,13 +2,13 @@ export default function CategorySelector({ category, categories, setCategory }) 
   let options = [];
 
   categories.forEach(element => {
-    options.push(<option value={element}>{element}</option>);
+    options.push(<option key={`category-option-${element}`} value={element}>{element}</option>);
   })
   
   return (
     <select
       onChange={(e) => {setCategory(e.target.value)}}
-      defaultValue={category}
+      value={category}
     >
       {options}
     </select>
