@@ -42,17 +42,20 @@ export default function Home({ allLists, userID, setUserID, loggedIn, setLoggedI
 	if (loggedIn) {
 		return (
 			<>
-				<CategorySelector
-					category={category}
-					categories={categories}
-					setCategory={setCategory}
-					list={list}
-				/>
-				<RandomiseButton
-					category={category}
-					setSelectedItem={setSelectedItem}
-					list={list}
-				/>
+				<div className="controls">
+					<CategorySelector
+						category={category}
+						categories={categories}
+						setCategory={setCategory}
+						list={list}
+					/>
+					<RandomiseButton
+						category={category}
+						setSelectedItem={setSelectedItem}
+						list={list}
+					/>
+				</div>
+
 				<Result selectedItem={selectedItem} list={list} />
 			</>
 		)

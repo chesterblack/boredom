@@ -20,7 +20,6 @@ export default function Main({ allLists, userID, setUserID, loggedIn, setLoggedI
 
 	return (
 		<>
-			<h1>I'm Bored</h1>
 			{page}
 		</>
 	)

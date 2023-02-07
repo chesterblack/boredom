@@ -9,8 +9,10 @@ export default function Result({ selectedItem }) {
 
     if (selectedItem.name) {
       inner = <>
-        <h2>{selectedItem.name}</h2>
-        {categoryList}
+        <h2 className="result">{selectedItem.name}</h2>
+        <div className="category-list">
+          {categoryList}
+        </div>
       </>;
     }
   }

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Signup() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -21,7 +23,7 @@ export default function Signup() {
 			.then(response => response.json())
 			.then((response) => {
 				if (response.status === 200) {
-					
+					window.location.replace('/');
 				} else {
 					alert(response.error);
 				}
@@ -29,16 +31,22 @@ export default function Signup() {
 	}
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<label>
-				<span>Username</span>
-				<input className="username" type="text" name="username" />
-			</label>
-			<label>
-				<span>Password</span>
-				<input className="password" type="password" name="password" />
-			</label>
-			<button type="submit">submit</button>
-		</form>
+		<>
+			<h2>Sign up</h2>
+			<form onSubmit={handleSubmit}>
+				<label>
+					<span>Username</span>
+					<input className="username" type="text" name="username" />
+				</label>
+				<label>
+					<span>Password</span>
+					<input className="password" type="password" name="password" />
+				</label>
+				<button type="submit">Submit</button>
+			</form>
+			<div className="signup-link">
+				<span>Back to</span> <Link href="/">login</Link>
+			</div>
+		</>
 	);
 }

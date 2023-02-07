@@ -6,11 +6,14 @@ export default function CategorySelector({ category, categories, setCategory }) 
   })
   
   return (
-    <select
-      onChange={(e) => {setCategory(e.target.value)}}
-      value={category}
-    >
-      {options}
-    </select>
+    <div className="selector">
+      <span>Category</span>
+      <select
+        onChange={(e) => {setCategory(e.target.value)}}
+        value={category}
+      >
+        {options}
+      </select>
+    </div>
   );
 }

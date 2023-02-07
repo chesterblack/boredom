@@ -47,10 +47,11 @@ export default function Login({ userID, setUserID, loggedIn, setLoggedIn }) {
 					<span>Password</span>
 					<input className="password" type="password" name="password" />
 				</label>
-				<button type="submit">submit</button>
+				<button type="submit">Submit</button>
 			</form>
-
-			<Link href="/signup">Signup</Link>
+			<div className="signup-link">
+				<span>No account?</span> <Link href="/signup">Signup</Link>
+			</div>
 		</>
 	);
 }

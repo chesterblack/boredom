@@ -6,12 +6,17 @@ export default function App({ Component, pageProps }) {
 	const [loggedIn, setLoggedIn] = useState(false);
 
   	return (
-		<Component
-			{...pageProps}
-			userID={userID}
-			setUserID={setUserID}
-			loggedIn={loggedIn}
-			setLoggedIn={setLoggedIn}
-		/>
+		<>
+			<h1>I'm <strong>Bored</strong></h1>
+			<main>
+				<Component
+					{...pageProps}
+					userID={userID}
+					setUserID={setUserID}
+					loggedIn={loggedIn}
+					setLoggedIn={setLoggedIn}
+				/>
+			</main>
+		</>
 	)
 }

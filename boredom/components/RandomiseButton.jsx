@@ -13,7 +13,7 @@ export default function RandomiseButton({ category, setSelectedItem, list }) {
   }
 
   return (
-    <button onClick={handleClick}>
+    <button className="randomise-button" onClick={handleClick}>
       Give me something to do
     </button>
   );

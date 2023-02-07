@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 			} else {
 				bodyObject.password = await hashPassword(bodyObject.password);
 				let newUser = await db.collection("users").insertOne(bodyObject);
-				res.json(newUser.ops[0]);
+				res.json({status: 200, user: newUser.ops[0]});
 			}
 
 			break;
