@@ -2,6 +2,7 @@ import Result from "@/components/Result";
 import RandomiseButton from "@/components/RandomiseButton";
 import CategorySelector from "@/components/CategorySelector";
 
+import Link from 'next/link';
 import { useEffect, useState } from "react";
 
 export default function Home({ allLists, userID, setUserID, loggedIn, setLoggedIn }) {
@@ -10,15 +11,17 @@ export default function Home({ allLists, userID, setUserID, loggedIn, setLoggedI
 	const [list, setList] = useState(false);
 	
 	useEffect(() => {
-		let filteredLists = allLists.data.filter((el) => {
-			return el.user_id === userID;
-		});
-
-		if (filteredLists.length > 0) {
-			let currentList = filteredLists[0];
-			setList(currentList.list);
-		} else {
-			setLoggedIn(false);
+		if (loggedIn) {
+			let filteredLists = allLists.data.filter((el) => {
+				return el.user_id === userID;
+			});
+	
+			if (filteredLists.length > 0) {
+				let currentList = filteredLists[0];
+				setList(currentList.list);
+			} else {
+				alert("No data found for this user");
+			}
 		}
 	}, [userID]);
 
@@ -39,17 +42,6 @@ export default function Home({ allLists, userID, setUserID, loggedIn, setLoggedI
 	if (loggedIn) {
 		return (
 			<>
-				<input
-					type="number"
-					min="0"
-					value={userID}
-					onChange={
-						(e) => {
-							setUserID(e.target.value);
-							setSelectedItem(false);
-						}
-					}
-				/>
 				<CategorySelector
 					category={category}
 					categories={categories}
@@ -65,6 +57,6 @@ export default function Home({ allLists, userID, setUserID, loggedIn, setLoggedI
 			</>
 		)
 	} else {
-		return <a href="/login">Please login</a>
+		return <Link href="/login">Please login</Link>
 	}
 }

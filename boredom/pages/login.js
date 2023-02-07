@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Login({ userID, setUserID, loggedIn, setLoggedIn }) {
 	const handleSubmit = async(e) => {
 		e.preventDefault();
@@ -24,22 +26,31 @@ export default function Login({ userID, setUserID, loggedIn, setLoggedIn }) {
 					if (response.passwordMatch) {
 						setUserID(response.userID);
 						setLoggedIn(true);
+					} else {
+						alert("Either this user doesn't exist, or you got the password wrong");
 					}
+				} else {
+					alert("Something went wrong, sorry");
 				}
 			})
 	}
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<label>
-				<span>Username</span>
-				<input className="username" type="text" name="username" />
-			</label>
-			<label>
-				<span>Password</span>
-				<input className="password" type="password" name="password" />
-			</label>
-			<button type="submit">submit</button>
-		</form>
+		<>
+			<h2>Login</h2>
+			<form onSubmit={handleSubmit}>
+				<label>
+					<span>Username</span>
+					<input className="username" type="text" name="username" />
+				</label>
+				<label>
+					<span>Password</span>
+					<input className="password" type="password" name="password" />
+				</label>
+				<button type="submit">submit</button>
+			</form>
+
+			<Link href="/signup">Signup</Link>
+		</>
 	);
 }

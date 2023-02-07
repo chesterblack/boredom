@@ -11,6 +11,11 @@ export default async function handler(req, res) {
 
 			const user = await db.collection("users").findOne({username: username});
 
+			if (!user) {
+				res.json({ status: 500, error: "Either this user doesn't exist, or you got the password wrong" });
+				return;
+			}
+
 			const passwordMatch = await checkPassword(password, user.password);
 
 			const hashedPassword = await hashPassword(req.body.password);

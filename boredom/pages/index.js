@@ -1,27 +1,29 @@
 import Login from "./login";
 import Home from "./home";
+import Signup from "./signup";
 
 export default function Main({ allLists, userID, setUserID, loggedIn, setLoggedIn }) {
-	if (loggedIn) {
-		return (
-			<Home
-				allLists={allLists}
-				userID={userID}
-				setUserID={setUserID}
-				loggedIn={loggedIn}
-				setLoggedIn={setLoggedIn}
-			/>
-		);
-	} else {
-		return (
-			<Login
-				userID={userID}
-				setUserID={setUserID}
-				loggedIn={loggedIn}
-				setLoggedIn={setLoggedIn}
-			/>
-		);
-	}
+	let page = loggedIn ?
+		<Home
+			allLists={allLists}
+			userID={userID}
+			setUserID={setUserID}
+			loggedIn={loggedIn}
+			setLoggedIn={setLoggedIn}
+		/> :
+		<Login
+			userID={userID}
+			setUserID={setUserID}
+			loggedIn={loggedIn}
+			setLoggedIn={setLoggedIn}
+		/>;
+
+	return (
+		<>
+			<h1>I'm Bored</h1>
+			{page}
+		</>
+	)
 }
 
 export async function getServerSideProps(context) {
