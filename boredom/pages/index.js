@@ -1,69 +1,27 @@
-import Result from "@/components/Result";
-import RandomiseButton from "@/components/RandomiseButton";
-import CategorySelector from "@/components/CategorySelector";
+import Login from "./login";
+import Home from "./home";
 
-import { useEffect, useState } from "react"
-
-export default function Home({ allLists }) {
-	const [category, setCategory] = useState('all');
-	const [selectedItem, setSelectedItem] = useState(false);
-	const [list, setList] = useState(false);
-	const [userID, setUserID] = useState("0");
-	
-	useEffect(() => {
-		let filteredLists = allLists.data.filter((el) => {
-			return el.user_id === userID;
-		});
-
-		if (filteredLists.length > 0) {
-			let currentList = filteredLists[0];
-			setList(currentList.list);
-		} else {
-			alert("Couldn't find user with id: " + userID);
-		}
-	}, [userID]);
-
-	let categories = [
-		'all',
-	];
-
-	if (list) {
-		list.forEach(element => {
-			element.categories.forEach(cat => {
-				if (!categories.includes(cat)) {
-					categories.push(cat);
-				}
-			});
-		});
+export default function Main({ allLists, userID, setUserID, loggedIn, setLoggedIn }) {
+	if (loggedIn) {
+		return (
+			<Home
+				allLists={allLists}
+				userID={userID}
+				setUserID={setUserID}
+				loggedIn={loggedIn}
+				setLoggedIn={setLoggedIn}
+			/>
+		);
+	} else {
+		return (
+			<Login
+				userID={userID}
+				setUserID={setUserID}
+				loggedIn={loggedIn}
+				setLoggedIn={setLoggedIn}
+			/>
+		);
 	}
-
-	return (
-		<>
-			<input
-				type="number"
-				min="0"
-				value={userID}
-				onChange={
-					(e) => {
-						setUserID(e.target.value);
-						setSelectedItem(false);
-					}
-				}
-			/>
-			<CategorySelector
-				category={category}
-				categories={categories}
-				setCategory={setCategory}
-				list={list}
-			/>
-			<RandomiseButton
-				category={category}
-				setSelectedItem={setSelectedItem}
-				list={list}
-			/>
-			<Result selectedItem={selectedItem} list={list} />
-		</>
-	)
 }
 
 export async function getServerSideProps(context) {
@@ -79,4 +37,3 @@ export async function getServerSideProps(context) {
 		props: { allLists },
 	};
 }
-  
