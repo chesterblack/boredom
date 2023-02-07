@@ -1,13 +1,15 @@
 const list = [
-	{ name: "Kipbite", category: "dev" },
-	{ name: "Bughunter", category: "dev" },
-	{ name: "Spellbook", category: "dev" },
+	{ name: "Kipbite", categories: ["dev"] },
 
-	{ name: "Bug portraits", category: "art" },
-	{ name: "Middle english font", category: "art" },
+	{ name: "Spellbook", categories: ["dev", "art"] },
+	{ name: "Bughunter", categories: ["dev", "art"] },
 
-	{ name: "Polgara's Rewot", category: "dnd" },
-	{ name: "Storms & Surges", category: "dnd" },
+	{ name: "Middle english font", categories: ["art"] },
+
+	{ name: "Polgara's Rewot", categories: ["dnd", "writing"] },
+	{ name: "Storms & Surges", categories: ["dnd", "writing"] },
+
+	{ name: "Vessel", categories: ["writing"] },
 ];
 
 export default list;

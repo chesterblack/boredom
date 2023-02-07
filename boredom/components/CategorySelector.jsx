@@ -1,16 +1,5 @@
-import list from "@/lib/list";
-
-export default function CategorySelector({ category, setCategory }) {
-  let categories = [
-    'all',
-  ];
+export default function CategorySelector({ category, categories, setCategory }) {
   let options = [];
-
-  list.forEach(element => {
-    if (!categories.includes(element.category)) {
-      categories.push(element.category);
-    }
-  });
 
   categories.forEach(element => {
     options.push(<option value={element}>{element}</option>);

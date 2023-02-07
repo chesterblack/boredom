@@ -5,7 +5,7 @@ export default function RandomiseButton({ category, selectedItem, setSelectedIte
     let workingList = list;
     if (category !== 'all') {
       workingList = list.filter((el) => {
-        return el.category === category;
+        return el.categories.includes(category);
       });
     }
 
