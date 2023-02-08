@@ -4,26 +4,15 @@ import CategorySelector from "@/components/CategorySelector";
 
 import Link from 'next/link';
 import { useEffect, useState } from "react";
+import AddNew from "../components/AddNew";
 
-export default function Home({ allLists, userID, setUserID, loggedIn, setLoggedIn }) {
+export default function Home({ allLists, user, setUser, updatedDatabase, setUpdatedDatabase }) {
+	const { _id, username } = user;
+	let loggedIn = user.username !== false;
+
 	const [category, setCategory] = useState('all');
 	const [selectedItem, setSelectedItem] = useState(false);
 	const [list, setList] = useState(false);
-	
-	useEffect(() => {
-		if (loggedIn) {
-			let filteredLists = allLists.data.filter((el) => {
-				return el.user_id === userID;
-			});
-	
-			if (filteredLists.length > 0) {
-				let currentList = filteredLists[0];
-				setList(currentList.list);
-			} else {
-				alert("No data found for this user");
-			}
-		}
-	}, [userID]);
 
 	let categories = [
 		'all',
@@ -38,6 +27,20 @@ export default function Home({ allLists, userID, setUserID, loggedIn, setLoggedI
 			});
 		});
 	}
+	
+	useEffect(() => {
+		console.log('updating');
+		if (loggedIn) {
+			let filteredLists = allLists.data.filter((el) => {
+				return el.user_id === _id;
+			});
+	
+			if (filteredLists.length > 0) {
+				let currentList = filteredLists[0];
+				setList(currentList.list);
+			}
+		}
+	}, [updatedDatabase]);
 
 	if (loggedIn) {
 		return (
@@ -57,9 +60,15 @@ export default function Home({ allLists, userID, setUserID, loggedIn, setLoggedI
 				</div>
 
 				<Result selectedItem={selectedItem} list={list} />
+
+				<AddNew
+					user={user}
+					updatedDatabase={updatedDatabase}
+					setUpdatedDatabase={setUpdatedDatabase}
+				/>
 			</>
-		)
+		);
 	} else {
-		return <Link href="/login">Please login</Link>
+		return <Link href="/login">Please login</Link>;
 	}
 }

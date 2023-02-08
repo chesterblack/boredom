@@ -23,7 +23,7 @@ export default async function handler(req, res) {
 			res.json({
 				status: 200,
 				passwordMatch: passwordMatch,
-				userID: user._id,
+				user: user,
 			});
 
 			break;

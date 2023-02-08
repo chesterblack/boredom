@@ -1,6 +1,10 @@
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
+import { useState } from "react";
 
-export default function Signup() {
+export default function Signup({ user, setUser }) {
+	let router = useRouter();
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
@@ -12,7 +16,7 @@ export default function Signup() {
 			password: password,
 		};
 
-		fetch('http://localhost:3000/api/signup', {
+		fetch('/api/signup', {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
@@ -23,14 +27,15 @@ export default function Signup() {
 			.then(response => response.json())
 			.then((response) => {
 				if (response.status === 200) {
-					window.location.replace('/');
+					setUser(response.user);
+					setInner(<Link href="/">Continue</Link>);
 				} else {
 					alert(response.error);
 				}
 			})
 	}
 
-	return (
+	const [inner, setInner] = useState(
 		<>
 			<h2>Sign up</h2>
 			<form onSubmit={handleSubmit}>
@@ -49,4 +54,6 @@ export default function Signup() {
 			</div>
 		</>
 	);
+
+	return inner;
 }

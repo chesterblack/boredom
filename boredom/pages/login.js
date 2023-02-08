@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Login({ userID, setUserID, loggedIn, setLoggedIn }) {
+export default function Login({ user, setUser }) {
 	const handleSubmit = async(e) => {
 		e.preventDefault();
 
@@ -12,7 +12,7 @@ export default function Login({ userID, setUserID, loggedIn, setLoggedIn }) {
 			password: password,
 		};
 
-		fetch('http://localhost:3000/api/login', {
+		fetch('/api/login', {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
@@ -24,8 +24,7 @@ export default function Login({ userID, setUserID, loggedIn, setLoggedIn }) {
 			.then((response) => {
 				if (response.status === 200) {
 					if (response.passwordMatch) {
-						setUserID(response.userID);
-						setLoggedIn(true);
+						setUser(response.user);
 					} else {
 						alert("Either this user doesn't exist, or you got the password wrong");
 					}
