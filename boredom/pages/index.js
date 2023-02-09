@@ -1,28 +1,33 @@
-import Login from "./login";
-import Home from "./home";
-import Signup from "./signup";
+import Login from "../components/Login";
+import Home from "../components/Home";
+import Signup from "../components/Signup";
+import { useEffect, useState } from "react";
 
-export default function Main({ allLists, user, setUser, updatedDatabase, setUpdatedDatabase }) {
-	let page = user.username ?
-		<Home
-			allLists={allLists}
-			user={user}
-			setUser={setUser}
-			updatedDatabase={updatedDatabase}
-			setUpdatedDatabase={setUpdatedDatabase}
-		/> :
-		<Login
-			user={user}
-			setUser={setUser}
-			updatedDatabase={updatedDatabase}
-			setUpdatedDatabase={setUpdatedDatabase}
-		/>;
+export default function Main(props) {
+	const [currentPage, setCurrentPage] = useState('login');
+	const [pageInner, setPageInner] = useState('');
 
-	return (
-		<>
-			{page}
-		</>
-	)
+	useEffect(() => {
+		switch (currentPage) {
+			case 'home':
+				setPageInner(
+					<Home {...props} setCurrentPage={setCurrentPage} />
+				);
+				break;
+			case 'signup':
+				setPageInner(<Signup {...props} setCurrentPage={setCurrentPage} />);
+				break;
+			case 'login':
+			default:
+				setPageInner(
+					<Login {...props} setCurrentPage={setCurrentPage} />
+				);
+				break;
+		}
+	}, [currentPage]);
+
+	
+	return pageInner;
 }
 
 export async function getServerSideProps(context) {

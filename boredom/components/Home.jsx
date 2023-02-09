@@ -4,7 +4,7 @@ import CategorySelector from "@/components/CategorySelector";
 
 import Link from 'next/link';
 import { useEffect, useState } from "react";
-import AddNew from "../components/AddNew";
+import AddNew from "./AddNew";
 
 export default function Home({ allLists, user, setUser, updatedDatabase, setUpdatedDatabase }) {
 	const { _id, username } = user;

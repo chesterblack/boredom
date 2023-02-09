@@ -1,7 +1,11 @@
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
+import { useState } from "react";
 
-export default function Login({ user, setUser }) {
-	const handleSubmit = async(e) => {
+export default function Signup({ setUser, setCurrentPage }) {
+	let router = useRouter();
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		const username = e.target.querySelector('.username').value;
@@ -12,7 +16,7 @@ export default function Login({ user, setUser }) {
 			password: password,
 		};
 
-		fetch('/api/login', {
+		fetch('/api/signup', {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
@@ -23,20 +27,17 @@ export default function Login({ user, setUser }) {
 			.then(response => response.json())
 			.then((response) => {
 				if (response.status === 200) {
-					if (response.passwordMatch) {
-						setUser(response.user);
-					} else {
-						alert("Either this user doesn't exist, or you got the password wrong");
-					}
+					setUser(response.user);
+					setCurrentPage('home');
 				} else {
-					alert("Something went wrong, sorry");
+					alert(response.error);
 				}
 			})
 	}
 
-	return (
+	const [inner, setInner] = useState(
 		<>
-			<h2>Login</h2>
+			<h2>Sign up</h2>
 			<form onSubmit={handleSubmit}>
 				<label>
 					<span>Username</span>
@@ -49,8 +50,10 @@ export default function Login({ user, setUser }) {
 				<button type="submit">Submit</button>
 			</form>
 			<div className="signup-link">
-				<span>No account?</span> <Link href="/signup">Signup</Link>
+				<span>Back to</span> <a onClick={() => {setCurrentPage('login')}}>login</a>
 			</div>
 		</>
 	);
+
+	return inner;
 }
