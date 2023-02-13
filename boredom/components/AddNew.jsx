@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-export default function AddNew({ user, updatedDatabase, setUpdatedDatabase }) {
-	const [name, setName] = useState('');
+export default function AddNew({ user, currentList, setCurrentList }) {
 	let [rawCategories, setRawCategories] = useState([]);
-  const [message, setMessage] = useState(<></>);
+	const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -32,12 +32,10 @@ export default function AddNew({ user, updatedDatabase, setUpdatedDatabase }) {
 			.then(response => response.json())
 			.then((response) => {
 				if (response.status === 200) {
-					setMessage(<div>{`${name} has been added`}</div>);
-          console.log(updatedDatabase);
-          setUpdatedDatabase(Date.now());
-          console.log(updatedDatabase);
+          setCurrentList([...response.list]);
+					setMessage(<div className="add-new-message"><strong>{name}</strong> has been added</div>);
 				} else {
-					setMessage(<div>Something went wrong, sorry</div>);
+					setMessage(<div className="add-new-message">Something went wrong, sorry</div>);
 				}
 			})
 	}
@@ -45,7 +43,6 @@ export default function AddNew({ user, updatedDatabase, setUpdatedDatabase }) {
 	return (
 		<div className="add-new">
       <h2>Add new item</h2>
-			{message}
 			<form onSubmit={handleSubmit}>
 				<label>
 					<span>Name of activity</span>
@@ -61,6 +58,7 @@ export default function AddNew({ user, updatedDatabase, setUpdatedDatabase }) {
 				</label>
 				<button type="submit">Submit</button>
 			</form>
+			{message}
 		</div>
 	);
 }

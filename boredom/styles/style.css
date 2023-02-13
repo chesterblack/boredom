@@ -164,3 +164,9 @@ strong {
 .add-new h2 {
     margin-bottom: 0;
 }
+
+.add-new-message {
+    margin-top: 20px;
+    font-size: 22px;
+    text-align: center;
+}

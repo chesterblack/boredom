@@ -1,6 +1,7 @@
-import Link from "next/link";
+import fetchList from "@/lib/update-list";
+import { CONFIG_FILES } from "next/dist/shared/lib/constants";
 
-export default function Login({ user, setUser, setCurrentPage }) {
+export default function Login({ user, setUser, setCurrentList, setCurrentPage, list, setList }) {
 	const handleSubmit = async(e) => {
 		e.preventDefault();
 
@@ -21,10 +22,12 @@ export default function Login({ user, setUser, setCurrentPage }) {
 			body: JSON.stringify(data),
 		})
 			.then(response => response.json())
-			.then((response) => {
+			.then(async (response) => {
 				if (response.status === 200) {
 					if (response.passwordMatch) {
 						setUser(response.user);
+            const newList = await fetchList(response.user._id);
+            setCurrentList(newList);
             setCurrentPage('home');
 					} else {
 						alert("Either this user doesn't exist, or you got the password wrong");

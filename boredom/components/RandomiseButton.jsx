@@ -1,8 +1,8 @@
-export default function RandomiseButton({ category, setSelectedItem, list }) {
+export default function RandomiseButton({ category, setSelectedItem, currentList }) {
   const handleClick = () => {
-    let workingList = list;
+    let workingList = currentList;
     if (category !== 'all') {
-      workingList = list.filter((el) => {
+      workingList = currentList.filter((el) => {
         return el.categories.includes(category);
       });
     }
